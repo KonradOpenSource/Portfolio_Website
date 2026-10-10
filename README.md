@@ -2,6 +2,12 @@
 
 A responsive full-stack developer portfolio built with Angular. It includes a home page, a project list and individual project pages, professional experience, and contact information.
 
+
+## Technologies 
+
+
+
+
 ## Requirements
 
 - Node.js `^22.22.3`, `^24.15.0`, or `>=26.0.0`, as required by the Angular CLI version used in this project.
