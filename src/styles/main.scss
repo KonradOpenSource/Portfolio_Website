@@ -1,0 +1,212 @@
+
+@use "./variables" as *;
+@use "./mixins" as *;
+@use "./typography";
+@use "./components";
+
+
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: $font-size-base;
+  scroll-behavior: smooth;
+ 
+  overflow-x: hidden;
+ 
+  background-color: $color-bg;
+  color-scheme: dark;
+}
+
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  font-weight: $font-weight-normal;
+  line-height: $line-height-base;
+  color: $color-text;
+  background-color: $color-bg;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+
+
+a {
+  color: $color-accent;
+  text-decoration: none;
+  transition: color $transition-fast;
+  @include focus-visible;
+
+  &:hover {
+    color: #00aacc;
+  }
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  @include focus-visible;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+
+
+.container {
+  @include container;
+}
+
+.section {
+  @include section-padding;
+}
+
+
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-heading;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  color: $color-text;
+}
+
+h1 { font-size: clamp(2rem, 5vw, $font-size-6xl); }
+h2 { font-size: clamp(1.5rem, 3.5vw, $font-size-4xl); }
+h3 { font-size: clamp(1.25rem, 2.5vw, $font-size-3xl); }
+h4 { font-size: $font-size-2xl; }
+h5 { font-size: $font-size-xl; }
+h6 { font-size: $font-size-lg; }
+
+p {
+  line-height: $line-height-relaxed;
+  color: $color-text-muted;
+}
+
+
+
+.sr-only {
+  @include visually-hidden;
+}
+
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: $space-4;
+  z-index: $z-tooltip;
+  padding: $space-3 $space-6;
+  background: $color-accent;
+  color: $color-black;
+  font-weight: $font-weight-bold;
+  border-radius: $radius-md;
+  transition: top $transition-fast;
+
+  &:focus {
+    top: $space-4;
+  }
+}
+
+
+
+.grid {
+  display: grid;
+  gap: $space-6;
+
+  &--2 {
+    grid-template-columns: 1fr;
+
+    @include breakpoint-up(md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &--3 {
+    grid-template-columns: 1fr;
+
+    @include breakpoint-up(md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include breakpoint-up(lg) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &--4 {
+    grid-template-columns: repeat(2, 1fr);
+
+    @include breakpoint-up(md) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include breakpoint-up(lg) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  &--auto {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+// ============================================================
+// SCROLLBAR STYLING
+// ============================================================
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: $color-bg-alt;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $color-bg-elevated;
+  border-radius: $radius-full;
+
+  &:hover {
+    background: rgba($color-accent, 0.4);
+  }
+}
+
+
+
+::selection {
+  background: rgba($color-accent, 0.25);
+  color: $color-white;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,11 @@
+@use "../../../styles/variables" as *;
+
+main {
+  padding-top: $header-height-mobile;
+  min-height: calc(100vh - $header-height-mobile);
+
+  @media (min-width: #{$breakpoint-md}) {
+    padding-top: $header-height;
+    min-height: calc(100vh - $header-height);
+  }
+}

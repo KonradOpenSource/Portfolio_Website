@@ -1,0 +1,67 @@
+:host {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-scene__canvas-host,
+.hero-scene__fallback {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-scene__canvas-host canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-scene__fallback {
+  display: grid;
+  place-items: center;
+  opacity: 0.5;
+  background: radial-gradient(ellipse at 72% 48%, rgba(32, 132, 186, 0.11), transparent 44%);
+}
+
+.hero-scene__fallback-core {
+  width: min(34vw, 300px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(94, 215, 255, 0.35);
+  background: linear-gradient(145deg, rgba(30, 79, 123, 0.16), rgba(25, 31, 65, 0.08));
+  clip-path: polygon(50% 0, 90% 24%, 100% 66%, 68% 100%, 23% 91%, 0 48%, 19% 14%);
+  box-shadow: 0 0 70px rgba(44, 177, 231, 0.14), inset 0 0 40px rgba(87, 180, 229, 0.1);
+}
+
+.hero-scene__fallback-ring {
+  position: absolute;
+  width: min(46vw, 410px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(80, 202, 239, 0.22);
+  border-radius: 50%;
+
+  &--one {
+    transform: scaleY(0.38) rotate(-25deg);
+  }
+
+  &--two {
+    transform: scaleY(0.38) rotate(55deg);
+    border-color: rgba(155, 111, 255, 0.2);
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-scene__fallback {
+    opacity: 0.28;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-scene__fallback,
+  .hero-scene__fallback-core,
+  .hero-scene__fallback-ring {
+    animation: none !important;
+    transition: none !important;
+  }
+}

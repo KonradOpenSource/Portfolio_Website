@@ -1,0 +1,84 @@
+{
+  "hash": "4eeebca5",
+  "configHash": "2a2fd951",
+  "lockfileHash": "af6a9f46",
+  "browserHash": "25110894",
+  "optimized": {
+    "@angular/common": {
+      "src": "../../../../../../node_modules/@angular/common/fesm2022/common.mjs",
+      "file": "@angular_common.js",
+      "fileHash": "119f57fd",
+      "needsInterop": false
+    },
+    "@angular/core": {
+      "src": "../../../../../../node_modules/@angular/core/fesm2022/core.mjs",
+      "file": "@angular_core.js",
+      "fileHash": "549cf49d",
+      "needsInterop": false
+    },
+    "@angular/core/rxjs-interop": {
+      "src": "../../../../../../node_modules/@angular/core/fesm2022/rxjs-interop.mjs",
+      "file": "@angular_core_rxjs-interop.js",
+      "fileHash": "8e7bcd7a",
+      "needsInterop": false
+    },
+    "@angular/platform-browser": {
+      "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
+      "file": "@angular_platform-browser.js",
+      "fileHash": "655b9e7e",
+      "needsInterop": false
+    },
+    "@angular/router": {
+      "src": "../../../../../../node_modules/@angular/router/fesm2022/router.mjs",
+      "file": "@angular_router.js",
+      "fileHash": "aa673a6c",
+      "needsInterop": false
+    },
+    "three": {
+      "src": "../../../../../../node_modules/three/build/three.module.js",
+      "file": "three.js",
+      "fileHash": "a6eb8f0d",
+      "needsInterop": false
+    },
+    "zone.js": {
+      "src": "../../../../../../node_modules/zone.js/fesm2015/zone.js",
+      "file": "zone__js.js",
+      "fileHash": "474ccea0",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "_resource-chunk-Da7hkGgl": {
+      "file": "_resource-chunk-Da7hkGgl.js",
+      "isDynamicEntry": false
+    },
+    "asyncToGenerator-Cbs20z5M": {
+      "file": "asyncToGenerator-Cbs20z5M.js",
+      "isDynamicEntry": false
+    },
+    "common-CYcud3qi": {
+      "file": "common-CYcud3qi.js",
+      "isDynamicEntry": false
+    },
+    "core-exKM1Zhz": {
+      "file": "core-exKM1Zhz.js",
+      "isDynamicEntry": false
+    },
+    "innerFrom-CU0UicYU": {
+      "file": "innerFrom-CU0UicYU.js",
+      "isDynamicEntry": false
+    },
+    "objectSpread2-weooBxVk": {
+      "file": "objectSpread2-weooBxVk.js",
+      "isDynamicEntry": false
+    },
+    "platform-browser-DvUjSocT": {
+      "file": "platform-browser-DvUjSocT.js",
+      "isDynamicEntry": false
+    },
+    "takeUntil-DNMXP7DG": {
+      "file": "takeUntil-DNMXP7DG.js",
+      "isDynamicEntry": false
+    }
+  }
+}

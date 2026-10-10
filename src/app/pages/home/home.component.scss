@@ -1,0 +1,1066 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+
+.hero {
+  position: relative;
+  min-height: calc(100vh - $header-height);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-block: $space-12;
+
+  app-hero-scene {
+    z-index: 0;
+    opacity: 0.62;
+  }
+
+ 
+  &__bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba($color-accent, 0.08) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+    mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.6) 80%, transparent 100%);
+  }
+
+
+  &__glow {
+    position: absolute;
+    border-radius: $radius-full;
+    pointer-events: none;
+    filter: blur(80px);
+
+    &--cyan {
+      width: 550px;
+      height: 550px;
+      top: -100px;
+      right: -100px;
+      background: radial-gradient(circle, rgba($color-accent, 0.12) 0%, transparent 70%);
+    }
+
+    &--violet {
+      width: 450px;
+      height: 450px;
+      bottom: -80px;
+      left: 5%;
+      background: radial-gradient(circle, rgba($color-secondary, 0.1) 0%, transparent 70%);
+    }
+  }
+
+
+  &__layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-12;
+    position: relative;
+    z-index: 1;
+
+    @include breakpoint-up(lg) {
+      grid-template-columns: 1.25fr 0.75fr;
+      align-items: center;
+      gap: $space-16;
+    }
+
+    @media (min-width: #{$breakpoint-lg}) and (max-width: 1199px) {
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      gap: $space-6;
+    }
+  }
+
+  
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: $space-5;
+    min-width: 0;
+  }
+
+  
+  &__badge-row {
+    display: flex;
+    align-items: center;
+  }
+
+  &__availability {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2;
+    padding: $space-2 $space-4;
+    background: rgba($color-success, 0.08);
+    border: 1px solid rgba($color-success, 0.25);
+    border-radius: $radius-full;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    color: #4ade80;
+    transition: all $transition-fast;
+
+    &:hover {
+      border-color: rgba($color-success, 0.5);
+      background: rgba($color-success, 0.14);
+    }
+  }
+
+  &__availability-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: $radius-full;
+    background: #4ade80;
+    box-shadow: 0 0 10px #4ade80;
+    animation: hero-dot-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes hero-dot-pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.3); opacity: 0.5; }
+  }
+
+  
+  &__heading {
+    font-family: $font-family-heading;
+    font-size: clamp(2.5rem, 6.5vw, $font-size-7xl);
+    font-weight: $font-weight-black;
+    line-height: $line-height-tight;
+    letter-spacing: $letter-spacing-tight;
+    color: $color-text;
+    margin: 0;
+
+    @media (max-width: #{$breakpoint-sm}) {
+      font-size: clamp(1.875rem, 10vw, 2.5rem);
+    }
+
+    @media (min-width: #{$breakpoint-lg}) and (max-width: 1199px) {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+    }
+  }
+
+  
+  &__spec {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $space-3;
+  }
+
+  &__spec-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: $space-1 $space-3;
+    background: rgba($color-accent, 0.12);
+    border: 1px solid rgba($color-accent, 0.3);
+    border-radius: $radius-sm;
+    font-family: $font-family-mono;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    color: $color-accent;
+    letter-spacing: $letter-spacing-wide;
+    text-transform: uppercase;
+  }
+
+  &__spec-motto {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    font-style: italic;
+  }
+
+  
+  &__typed {
+    font-family: $font-family-mono;
+    font-size: $font-size-sm;
+    background: rgba($color-bg-surface, 0.8);
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    padding: $space-2 $space-4;
+    width: fit-content;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    color: $color-text;
+  }
+
+  &__typed-prefix {
+    color: $color-text-subtle;
+  }
+
+  &__typed-val {
+    color: $color-accent;
+    font-weight: $font-weight-semibold;
+  }
+
+  &__cursor {
+    display: inline-block;
+    color: $color-accent;
+    animation: hero-blink 1s step-end infinite;
+    font-weight: bold;
+  }
+
+  @keyframes hero-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+ 
+  &__description {
+    font-size: $font-size-lg;
+    line-height: $line-height-relaxed;
+    color: $color-text-muted;
+    max-width: 58ch;
+    margin: 0;
+
+    strong {
+      color: $color-text;
+      font-weight: $font-weight-semibold;
+    }
+  }
+
+  
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $space-4;
+    padding-top: $space-2;
+  }
+
+  
+  &__social {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $space-3;
+    padding-top: $space-2;
+  }
+
+  &__social-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2;
+    padding: $space-2 $space-4;
+    background: $color-bg-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius-full;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    color: $color-text-muted;
+    transition: all $transition-fast;
+
+    svg {
+      color: $color-text-subtle;
+      transition: color $transition-fast;
+    }
+
+    &:hover {
+      color: $color-text;
+      border-color: rgba($color-accent, 0.4);
+      background: $color-bg-elevated;
+      transform: translateY(-2px);
+
+      svg {
+        color: $color-accent;
+      }
+    }
+  }
+
+  
+  &__stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2;
+    padding-top: $space-2;
+  }
+
+  
+  &__card {
+    @include glass-surface(16px, rgba($color-bg-surface, 0.75));
+    border-radius: $radius-2xl;
+    padding: $space-6;
+    @include neon-border;
+    display: flex;
+    flex-direction: column;
+    gap: $space-5;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+    min-width: 0;
+
+    @include breakpoint-up(lg) {
+      padding: $space-8;
+    }
+  }
+
+  &__card-terminal {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    padding-bottom: $space-3;
+    border-bottom: 1px solid $color-border;
+  }
+
+  &__card-dots {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+  }
+
+  &__card-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: $radius-full;
+
+    &--red { background: #ef4444; }
+    &--yellow { background: #f59e0b; }
+    &--green { background: #10b981; }
+  }
+
+  &__card-filename {
+    font-family: $font-family-mono;
+    font-size: $font-size-xs;
+    color: $color-text-subtle;
+  }
+
+  &__card-code {
+    background: rgba($color-bg, 0.85);
+    border: 1px solid $color-border;
+    border-radius: $radius-lg;
+    padding: $space-4;
+    overflow-x: auto;
+
+    pre {
+      margin: 0;
+      font-family: $font-family-mono;
+      font-size: $font-size-xs;
+      line-height: $line-height-relaxed;
+    }
+
+    code {
+      display: block;
+    }
+
+    .c-kw   { color: #c084fc; font-weight: $font-weight-semibold; }
+    .c-var  { color: #67e8f9; }
+    .c-op   { color: #94a3b8; }
+    .c-key  { color: #f472b6; }
+    .c-str  { color: #86efac; }
+    .c-bool { color: #fb923c; }
+  }
+
+  &__card-status {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    padding: $space-3 $space-4;
+    background: rgba($color-bg-elevated, 0.8);
+    border: 1px solid $color-border;
+    border-radius: $radius-lg;
+  }
+
+  &__card-status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: $radius-full;
+    background: #10b981;
+    box-shadow: 0 0 10px #10b981;
+    flex-shrink: 0;
+  }
+
+  &__card-status-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__card-status-main {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    color: $color-text;
+  }
+
+  &__card-status-sub {
+    font-size: 11px;
+    color: $color-text-muted;
+  }
+
+  &__card-areas {
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+  }
+
+  &__card-area-title {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    color: $color-text-muted;
+    font-family: $font-family-mono;
+    text-transform: uppercase;
+    letter-spacing: $letter-spacing-wide;
+  }
+
+  &__card-area-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $space-2;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__card-area-item {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    font-size: $font-size-xs;
+    color: $color-text;
+    background: $color-bg-surface;
+    border: 1px solid $color-border;
+    padding: $space-2 $space-3;
+    border-radius: $radius-md;
+  }
+
+
+  &__scroll {
+    display: flex;
+    justify-content: center;
+    padding-top: $space-12;
+  }
+
+  &__scroll-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $space-1;
+    color: $color-text-subtle;
+    text-decoration: none;
+    transition: color $transition-fast, transform $transition-fast;
+
+    &:hover {
+      color: $color-accent;
+      transform: translateY(3px);
+    }
+  }
+
+  &__scroll-text {
+    font-family: $font-family-mono;
+    font-size: $font-size-xs;
+    letter-spacing: $letter-spacing-wider;
+    text-transform: uppercase;
+  }
+
+  &__scroll-icon {
+    animation: hero-scroll-bounce 2s ease-in-out infinite;
+  }
+
+  @keyframes hero-scroll-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+}
+
+
+.about-section {
+  background: $color-bg-alt;
+  position: relative;
+  border-top: 1px solid $color-border;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-8;
+
+    @include breakpoint-up(lg) {
+      grid-template-columns: 1.05fr 0.95fr;
+      align-items: start;
+      gap: $space-10;
+    }
+  }
+
+
+  &__narrative {
+    height: 100%;
+    border-color: rgba($color-accent, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+    .card__body {
+      display: flex;
+      flex-direction: column;
+      gap: $space-6;
+    }
+  }
+
+  &__header-meta {
+    display: flex;
+    align-items: center;
+    gap: $space-4;
+    padding-bottom: $space-4;
+    border-bottom: 1px solid $color-border;
+  }
+
+  &__avatar-mini {
+    width: 52px;
+    height: 52px;
+    border-radius: $radius-full;
+    background: $gradient-accent;
+    color: $color-bg;
+    @include flex-center;
+    font-family: $font-family-heading;
+    font-weight: $font-weight-black;
+    font-size: $font-size-lg;
+    box-shadow: $shadow-glow-sm;
+    flex-shrink: 0;
+  }
+
+  &__name {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $color-text;
+    margin: 0;
+  }
+
+  &__role {
+    font-size: $font-size-sm;
+    color: $color-accent;
+    font-family: $font-family-mono;
+    margin: 2px 0 0 0;
+  }
+
+  &__paragraphs {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+
+    p {
+      font-size: $font-size-base;
+      line-height: $line-height-relaxed;
+      color: $color-text-muted;
+      margin: 0;
+
+      strong {
+        color: $color-text;
+        font-weight: $font-weight-semibold;
+      }
+    }
+  }
+
+  &__principles {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+    padding: $space-4;
+    background: rgba($color-bg, 0.6);
+    border: 1px solid $color-border;
+    border-radius: $radius-lg;
+  }
+
+  &__principles-title {
+    font-size: $font-size-xs;
+    font-family: $font-family-mono;
+    text-transform: uppercase;
+    letter-spacing: $letter-spacing-wide;
+    color: $color-text-subtle;
+    margin: 0 0 $space-1 0;
+  }
+
+  &__principle-item {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-3;
+
+    strong {
+      display: block;
+      font-size: $font-size-sm;
+      color: $color-text;
+    }
+
+    p {
+      font-size: $font-size-xs;
+      color: $color-text-muted;
+      margin: 2px 0 0 0;
+      line-height: $line-height-normal;
+    }
+  }
+
+  &__principle-icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $space-4;
+    padding-top: $space-2;
+  }
+
+
+  &__pillars {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-4;
+
+    @include breakpoint-up(sm) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+
+.pillar-card {
+  height: 100%;
+  transition: transform $transition-base, border-color $transition-base, box-shadow $transition-base;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: rgba($color-accent, 0.35);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba($color-accent, 0.08);
+  }
+
+  .card__body {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+    height: 100%;
+  }
+
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $space-1;
+  }
+
+  &__icon {
+    font-size: 1.75rem;
+  }
+
+  &__badge {
+    font-family: $font-family-mono;
+    font-size: 11px;
+    padding: 2px $space-2;
+    border-radius: $radius-sm;
+    background: rgba($color-secondary, 0.12);
+    border: 1px solid rgba($color-secondary, 0.25);
+    color: $color-secondary;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+    color: $color-text;
+    margin: 0;
+  }
+
+  &__desc {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    line-height: $line-height-normal;
+    margin: 0;
+  }
+
+  &__points {
+    list-style: none;
+    padding: 0;
+    margin: $space-2 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+    margin-top: auto;
+    padding-top: $space-2;
+    border-top: 1px solid $color-border;
+
+    li {
+      display: flex;
+      align-items: flex-start;
+      gap: $space-2;
+      font-size: $font-size-xs;
+      color: $color-text-muted;
+      line-height: $line-height-snug;
+
+      svg {
+        color: $color-accent;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+    }
+  }
+}
+
+
+.skills-section {
+  background: $color-bg;
+  border-top: 1px solid $color-border;
+  position: relative;
+}
+
+
+.skills-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  justify-content: center;
+  margin-bottom: $space-6;
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2;
+    padding: $space-2 $space-4;
+    background: $color-bg-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius-full;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      color: $color-text;
+      border-color: rgba($color-accent, 0.4);
+      background: $color-bg-elevated;
+    }
+
+    &--active {
+      color: $color-accent;
+      border-color: $color-accent;
+      background: rgba($color-accent, 0.12);
+      box-shadow: 0 0 16px rgba($color-accent, 0.15);
+      font-weight: $font-weight-semibold;
+    }
+  }
+
+  &__icon {
+    font-size: 1rem;
+  }
+
+  &__label {
+    white-space: nowrap;
+  }
+
+  &__count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    font-size: 11px;
+    font-family: $font-family-mono;
+    border-radius: $radius-full;
+    background: rgba(255, 255, 255, 0.08);
+  }
+}
+
+// Category Summary / Info Bar
+.skills-info-bar {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-3 $space-5;
+  background: rgba($color-bg-surface, 0.7);
+  border: 1px solid rgba($color-accent, 0.2);
+  border-radius: $radius-xl;
+  margin-bottom: $space-8;
+
+  &__icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  &__text {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    margin: 0;
+    line-height: $line-height-normal;
+
+    strong {
+      color: $color-text;
+      margin-right: $space-1;
+    }
+  }
+}
+
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-6;
+
+  @include breakpoint-up(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include breakpoint-up(xl) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+
+.skill-card {
+  height: 100%;
+  transition: transform $transition-base, border-color $transition-base, box-shadow $transition-base;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: rgba($color-accent, 0.4);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4), 0 0 20px rgba($color-accent, 0.08);
+  }
+
+  .card__body {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+    height: 100%;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    padding-bottom: $space-3;
+    border-bottom: 1px solid $color-border;
+  }
+
+  &__icon-box {
+    width: 44px;
+    height: 44px;
+    border-radius: $radius-lg;
+    background: rgba($color-accent, 0.1);
+    border: 1px solid rgba($color-accent, 0.25);
+    @include flex-center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  &__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__category {
+    font-family: $font-family-mono;
+    font-size: 11px;
+    color: $color-secondary;
+    text-transform: uppercase;
+    letter-spacing: $letter-spacing-wide;
+  }
+
+  &__name {
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+    color: $color-text;
+    margin: 0;
+  }
+
+  &__application {
+    padding: $space-3;
+    background: rgba($color-bg, 0.6);
+    border-radius: $radius-md;
+    border: 1px solid rgba($color-border, 0.7);
+  }
+
+  &__application-text {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    line-height: $line-height-relaxed;
+    margin: 0;
+  }
+
+  &__points {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+    flex: 1;
+
+    li {
+      display: flex;
+      align-items: flex-start;
+      gap: $space-2;
+      font-size: $font-size-xs;
+      color: $color-text-muted;
+      line-height: $line-height-snug;
+
+      svg {
+        color: $color-accent;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+    }
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2;
+    margin-top: auto;
+    padding-top: $space-3;
+    border-top: 1px solid $color-border;
+  }
+
+  &__tag {
+    display: inline-block;
+    font-family: $font-family-mono;
+    font-size: 11px;
+    padding: 2px $space-2;
+    border-radius: $radius-sm;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $color-border;
+    color: $color-text-subtle;
+  }
+}
+
+
+.featured {
+  background: $color-bg-alt;
+  border-top: 1px solid $color-border;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-6;
+
+    @include breakpoint-up(md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include breakpoint-up(xl) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__card {
+    background: $color-bg-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius-xl;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform $transition-base, border-color $transition-base, box-shadow $transition-base;
+
+    &:hover {
+      transform: translateY(-4px);
+      border-color: rgba($color-accent, 0.35);
+      box-shadow: $shadow-xl, 0 0 24px rgba($color-accent, 0.08);
+    }
+  }
+
+  &__card-image {
+    position: relative;
+    height: 180px;
+    overflow: hidden;
+    @include flex-center;
+  }
+
+  &__card-image-inner {
+    position: absolute;
+    inset: 0;
+    transition: transform $transition-slow;
+
+    .featured__card:hover & {
+      transform: scale(1.05);
+    }
+  }
+
+  &__card-image-label {
+    position: relative;
+    z-index: 1;
+    font-size: 3rem;
+  }
+
+  &__card-body {
+    padding: $space-6;
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+    flex: 1;
+  }
+
+  &__card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2;
+  }
+
+  &__card-title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $color-text;
+    margin: 0;
+  }
+
+  &__card-desc {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    line-height: $line-height-relaxed;
+    margin: 0;
+    flex: 1;
+  }
+
+  &__more {
+    display: flex;
+    justify-content: center;
+    margin-top: $space-12;
+  }
+}
+
+
+.cta-section {
+  background: $color-bg;
+}
+
+.cta-banner {
+  position: relative;
+  padding: $space-12 $space-8;
+  border-radius: $radius-2xl;
+  background: linear-gradient(135deg, rgba($color-bg-surface, 0.9) 0%, rgba($color-bg-elevated, 0.9) 100%);
+  border: 1px solid rgba($color-accent, 0.2);
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-4;
+
+  @include breakpoint-up(md) {
+    padding: $space-16 $space-12;
+  }
+
+  &__glow {
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 300px;
+    background: radial-gradient(ellipse, rgba($color-accent, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+    filter: blur(40px);
+  }
+
+  &__title {
+    font-family: $font-family-heading;
+    font-size: clamp(1.75rem, 4vw, $font-size-4xl);
+    font-weight: $font-weight-bold;
+    color: $color-text;
+    margin: 0;
+    max-width: 25ch;
+  }
+
+  &__desc {
+    font-size: $font-size-base;
+    color: $color-text-muted;
+    max-width: 50ch;
+    margin: 0;
+    line-height: $line-height-relaxed;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: $space-4;
+    margin-top: $space-2;
+  }
+}
